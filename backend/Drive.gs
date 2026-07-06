@@ -1,7 +1,7 @@
 /**
  * ============================================================
  * TK Pro Enterprise OS
- * Version: 0.1.0
+ * Version: 0.2.0
  * File: Drive.gs
  * ============================================================
  */
@@ -9,7 +9,7 @@
 const Drive = {
 
   /**
-   * Lists folders and files inside the configured root folder.
+   * Lists folders and files inside a workspace folder.
    */
   list(data = {}) {
 
@@ -17,16 +17,22 @@ const Drive = {
 
       const folderId = data.folderId || CONFIG.ROOT_FOLDER_ID;
 
+      // Validate input
       Validation.required(folderId, "Folder ID");
+
+      // Security
+      Permissions.requireWorkspaceFolder(folderId);
 
       const folder = DriveApp.getFolderById(folderId);
 
       const folders = [];
       const files = [];
 
+      // Collect folders
       const folderIterator = folder.getFolders();
 
       while (folderIterator.hasNext()) {
+
         const f = folderIterator.next();
 
         folders.push({
@@ -34,26 +40,43 @@ const Drive = {
           name: f.getName(),
           url: f.getUrl()
         });
+
       }
 
+      // Collect files
       const fileIterator = folder.getFiles();
 
       while (fileIterator.hasNext()) {
+
         const f = fileIterator.next();
 
         files.push({
           id: f.getId(),
           name: f.getName(),
           type: f.getMimeType(),
-          url: f.getUrl()
+          size: f.getSize(),
+          url: f.getUrl(),
+          lastUpdated: f.getLastUpdated().toISOString()
         });
+
       }
+
+      LoggerService.info("Drive.list()", {
+        folderId,
+        folders: folders.length,
+        files: files.length
+      });
 
       return Response.success(
         {
           folder: {
             id: folder.getId(),
-            name: folder.getName()
+            name: folder.getName(),
+            url: folder.getUrl()
+          },
+          summary: {
+            folders: folders.length,
+            files: files.length
           },
           folders,
           files
