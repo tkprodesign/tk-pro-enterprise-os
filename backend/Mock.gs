@@ -9,7 +9,7 @@
 const Mock = {
 
   version() {
-    return "v1";
+    return "v2";
   }
 
 };
