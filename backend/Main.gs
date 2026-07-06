@@ -35,14 +35,29 @@ function doGet(e) {
  * Handles POST requests.
  */
 function doPost(e) {
-  Logger.log("POST HIT");
+  try {
 
-  return ContentService
-    .createTextOutput(
-      JSON.stringify({
-        status: "success",
-        message: "POST reached"
-      })
-    )
-    .setMimeType(ContentService.MimeType.JSON);
+    const body = e && e.postData && e.postData.contents
+      ? Helpers.parseJson(e.postData.contents)
+      : {};
+
+    if (!body) {
+      return Response.error(
+        "Invalid JSON body.",
+        HTTP.BAD_REQUEST
+      );
+    }
+
+    return Router.route(body);
+
+  } catch (error) {
+
+    LoggerService.error("POST Error", error);
+
+    return Response.error(
+      error.message,
+      HTTP.INTERNAL_SERVER_ERROR
+    );
+
+  }
 }
