@@ -10,6 +10,27 @@ const ServiceRegistry = {
 
   services: {},
 
+  initialized: false,
+
+  initialize() {
+
+    if (this.initialized) return;
+
+    this.register(Drive);
+    // this.register(Docs);
+    // this.register(Sheets);
+    // this.register(Gmail);
+    // this.register(Calendar);
+    // this.register(Forms);
+
+    this.initialized = true;
+
+    LoggerService.info("Service Registry Initialized", {
+      services: this.list()
+    });
+
+  },
+
   register(service) {
 
     if (!service || !service.meta || !service.meta.name) {
@@ -18,18 +39,29 @@ const ServiceRegistry = {
 
     this.services[service.meta.name] = service;
 
-    LoggerService.info("Service Registered", {
-      service: service.meta.name
-    });
-
   },
 
   get(name) {
+
+    this.initialize();
+
     return this.services[name] || null;
+
   },
 
   list() {
+
+    this.initialize();
+
     return Object.keys(this.services);
+
+  },
+  describe() {
+
+    this.initialize();
+
+    return Object.values(this.services).map(service => service.meta);
+
   }
 
 };

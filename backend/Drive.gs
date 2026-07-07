@@ -8,10 +8,18 @@
 
 const Drive = {
   meta: {
-    name: "Drive",
-    version: "1.0.0",
-    description: "Google Drive Service"
-  },
+  name: "Drive",
+  version: "1.0.0",
+  description: "Google Drive Service",
+
+  actions: [
+    {
+      name: "drive.list",
+      description: "Lists folders and files inside a workspace folder."
+    }
+  ]
+
+},
   /**
    * Lists folders and files inside a workspace folder.
    */
@@ -102,4 +110,3 @@ const Drive = {
   }
 
 };
-ServiceRegistry.register(Drive);
