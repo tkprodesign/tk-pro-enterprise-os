@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tk-pro-enterprise-os",
+  "main": "src/index.js",
+  "compatibility_date": "2026-05-03"
+}
