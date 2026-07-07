@@ -1,0 +1,108 @@
+{
+  "name": "TK CLI",
+  "version": "0.1.0",
+  "description": "Developer command interface for TK Pro Enterprise OS.",
+
+  "groups": [
+    {
+      "name": "Navigation",
+      "commands": [
+        "root",
+        "backend",
+        "worker",
+        "docs",
+        "knowledge",
+        "prompts",
+        "tests",
+        "scripts"
+      ]
+    },
+
+    {
+      "name": "Project",
+      "commands": [
+        "init",
+        "bootstrap",
+        "clean",
+        "status",
+        "health",
+        "version"
+      ]
+    },
+
+    {
+      "name": "Git",
+      "commands": [
+        "status",
+        "add",
+        "commit",
+        "push",
+        "pull",
+        "fetch",
+        "branch",
+        "checkout",
+        "merge",
+        "rebase",
+        "log",
+        "diff",
+        "stash",
+        "restore"
+      ]
+    },
+
+    {
+      "name": "Apps Script",
+      "commands": [
+        "clasp.push",
+        "clasp.pull",
+        "clasp.status",
+        "clasp.open",
+        "clasp.logs",
+        "clasp.login"
+      ]
+    },
+
+    {
+      "name": "Cloudflare Worker",
+      "commands": [
+        "worker.dev",
+        "worker.deploy",
+        "worker.tail",
+        "worker.logs",
+        "worker.secret",
+        "worker.whoami",
+        "worker.login"
+      ]
+    },
+
+    {
+      "name": "Testing",
+      "commands": [
+        "test",
+        "test.backend",
+        "test.worker",
+        "test.registry",
+        "test.all"
+      ]
+    },
+
+    {
+      "name": "Diagnostics",
+      "commands": [
+        "doctor",
+        "check",
+        "verify",
+        "logs"
+      ]
+    },
+
+    {
+      "name": "Deployment",
+      "commands": [
+        "deploy.backend",
+        "deploy.worker",
+        "deploy.all"
+      ]
+    }
+  ]
+}

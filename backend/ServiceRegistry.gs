@@ -16,6 +16,7 @@ const ServiceRegistry = {
 
     if (this.initialized) return;
 
+    this.register(System);
     this.register(Drive);
     // this.register(Docs);
     // this.register(Sheets);

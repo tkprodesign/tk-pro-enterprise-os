@@ -1,8 +1,8 @@
-function testServiceRegistry() {
+function testSystemDescribe() {
 
   Logger.log(
     JSON.stringify(
-      ServiceRegistry.describe(),
+      System.describe(),
       null,
       2
     )

@@ -20,6 +20,8 @@ const Router = {
 
     switch (action) {
 
+      case ACTIONS.SYSTEM_DESCRIBE:
+      return System.describe();
       case ACTIONS.PING:
         return Response.success(
           {

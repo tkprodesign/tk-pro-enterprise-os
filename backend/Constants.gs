@@ -27,6 +27,7 @@ const ACTIONS = Object.freeze({
 
   // System
   PING: "ping",
+SYSTEM_DESCRIBE: "system.describe",
 
   // Drive
   DRIVE_LIST: "drive.list",

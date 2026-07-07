@@ -18,6 +18,60 @@ task = "workflow.run"
 args = "Start application"
 
 [[workflows.workflow]]
+
+name = "🚀 Bootstrap"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node bootstrap.js"
+
+[[workflows.workflow]]
+
+name = "⬆️ Clasp Push"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && clasp push"
+
+[[workflows.workflow]]
+
+name = "⬇️ Clasp Pull"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && clasp pull"
+
+[[workflows.workflow]]
+
+name = "☁️ Deploy Worker"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd worker && npx wrangler deploy"
+
+[[workflows.workflow]]
+
+name = "📤 Git Push"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git add . && git commit -m 'Update' && git push"
+
+[[workflows.workflow]]
+
+name = "📥 Git Pull"
+author = "TK"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git pull"
+
+[[workflows.workflow]]
 name = "Start application"
 author = "agent"
 
