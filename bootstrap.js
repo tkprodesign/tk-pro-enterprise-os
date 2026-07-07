@@ -3,6 +3,7 @@ const path = require("path");
 
 const folders = [
   "backend",
+  "worker",
   "docs",
   "knowledge",
   "prompts",
@@ -11,25 +12,52 @@ const folders = [
 ];
 
 const backendFiles = [
+  // Core
   "Main.gs",
   "Router.gs",
+  "ServiceRegistry.gs",
+
+  // Configuration
   "Config.gs",
+  "Constants.gs",
+
+  // Security
   "Auth.gs",
+  "Permissions.gs",
+  "Validation.gs",
+
+  // Infrastructure
   "Response.gs",
   "Logger.gs",
+  "Helpers.gs",
+
+  // Services
   "Drive.gs",
   "Docs.gs",
   "Sheets.gs",
   "Gmail.gs",
   "Calendar.gs",
   "Forms.gs",
-  "Permissions.gs",
-  "Validation.gs",
-  "Helpers.gs",
-  "Constants.gs",
+
+  // Testing
   "Test.gs",
+
+  // Manifest
   "appsscript.json"
 ];
+
+const workerFolders = [
+  "src"
+];
+
+const workerFiles = {
+  "package.json": "",
+  "wrangler.jsonc": "",
+  ".gitignore": `.wrangler/
+node_modules/
+`,
+  "src/index.js": ""
+};
 
 const rootFiles = {
   "README.md": "# TK Pro Enterprise OS\n",
@@ -38,17 +66,30 @@ const rootFiles = {
 .env
 `,
   "LICENSE": "",
-  "package.json": JSON.stringify({
-    name: "tk-pro-enterprise-os",
-    version: "0.1.0",
-    private: true
-  }, null, 2)
+  "package.json": JSON.stringify(
+    {
+      name: "tk-pro-enterprise-os",
+      version: "0.2.0",
+      private: true
+    },
+    null,
+    2
+  )
 };
 
 console.log("Creating folders...");
 
 folders.forEach(folder => {
   fs.mkdirSync(folder, { recursive: true });
+  console.log("✓", folder);
+});
+
+console.log("Creating Worker folders...");
+
+workerFolders.forEach(folder => {
+  const folderPath = path.join("worker", folder);
+  fs.mkdirSync(folderPath, { recursive: true });
+  console.log("✓", folderPath);
 });
 
 console.log("Creating backend files...");
@@ -62,6 +103,17 @@ backendFiles.forEach(file => {
   }
 });
 
+console.log("Creating Worker files...");
+
+Object.entries(workerFiles).forEach(([file, content]) => {
+  const filePath = path.join("worker", file);
+
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, content);
+    console.log("✓", filePath);
+  }
+});
+
 console.log("Creating root files...");
 
 Object.entries(rootFiles).forEach(([file, content]) => {
@@ -71,4 +123,4 @@ Object.entries(rootFiles).forEach(([file, content]) => {
   }
 });
 
-console.log("\nBootstrap Complete!");
+console.log("\n🚀 TK Pro Enterprise OS Bootstrap Complete!");

@@ -7,7 +7,11 @@
  */
 
 const Drive = {
-
+  meta: {
+    name: "Drive",
+    version: "1.0.0",
+    description: "Google Drive Service"
+  },
   /**
    * Lists folders and files inside a workspace folder.
    */
@@ -98,3 +102,4 @@ const Drive = {
   }
 
 };
+ServiceRegistry.register(Drive);
